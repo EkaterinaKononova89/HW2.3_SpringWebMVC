@@ -17,9 +17,6 @@ public class PostRepositoryStubImpl implements PostRepository {
     private static final AtomicLong cnt = new AtomicLong(0);
 
     public List<Post> all() {
-        if(posts.isEmpty()) {
-            return List.of(new Post(0, "List is empty")); // хочется вывести сообщение, но нет идей, как это сделать иначе
-        }
         return new ArrayList<>(posts.values());
     }
 
@@ -36,7 +33,7 @@ public class PostRepositoryStubImpl implements PostRepository {
             post.setId(cnt.incrementAndGet());
             posts.put(post.getId(), post);
         } else if (post.getId() != 0) {
-            if (posts.containsKey(post.getId())) {
+            if (posts.containsKey(post.getId()) && !posts.get(post.getId()).getRemoved()) {
                 posts.replace(post.getId(), post);
             } else {
                 return null;
@@ -47,7 +44,7 @@ public class PostRepositoryStubImpl implements PostRepository {
 
     public void removeById(long id) throws NotFoundException {
         if (posts.containsKey(id)) {
-            posts.remove(id);
+            posts.get(id).setRemoved(true);
             return;
         }
         throw new NotFoundException("Delete exception. Post with ID " + id + " not found");

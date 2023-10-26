@@ -2,9 +2,6 @@
 GET http://localhost:9999/api/posts
 
 ###
-GET http://localhost:9999/api/posts/2
-
-###
 POST http://localhost:9999/api/posts
 Content-Type: application/json
 
@@ -27,9 +24,21 @@ POST http://localhost:9999/api/posts
 Content-Type: application/json
 
 {
-  "id": 3,
+  "id": 0,
+  "content": "3 Post"
+}
+
+###
+POST http://localhost:9999/api/posts
+Content-Type: application/json
+
+{
+  "id": 4,
   "content": "Not found 404"
 }
+
+###
+GET http://localhost:9999/api/posts
 
 ###
 POST http://localhost:9999/api/posts
@@ -41,7 +50,28 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:9999/api/posts
+
+###
+GET http://localhost:9999/api/posts/4
+
+###
 DELETE http://localhost:9999/api/posts/2
 
 ###
-DELETE http://localhost:9999/api/posts/3
+GET http://localhost:9999/api/posts
+
+###
+GET http://localhost:9999/api/posts/2
+
+###
+POST http://localhost:9999/api/posts
+Content-Type: application/json
+
+{
+  "id": 2,
+  "content": "2 after DELETE 404 Not Found"
+}
+
+###
+DELETE http://localhost:9999/api/posts/4

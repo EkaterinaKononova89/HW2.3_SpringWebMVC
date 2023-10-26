@@ -3,11 +3,12 @@ package ru.netology.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ru.netology.model.Post;
+import ru.netology.dto.PostDto;
 import ru.netology.service.PostService;
 
 import java.util.List;
 
-@RestController // замена с обычного @Controller позволяет делать автоматич конвертацию JSON
+@RestController // замена с @Controller позволяет делать автоматич конвертацию JSON
 @RequestMapping("api/posts")
 public class PostController {
     private final PostService service;
@@ -17,17 +18,17 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> all() {
+    public List<PostDto> all() {
         return service.all();
     }
 
     @GetMapping("/{id}")
-    public Post getById(@PathVariable long id) {
+    public PostDto getById(@PathVariable long id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public Post save(@RequestBody Post post) {
+    public PostDto save(@RequestBody Post post) {
         return service.save(post);
     }
 
